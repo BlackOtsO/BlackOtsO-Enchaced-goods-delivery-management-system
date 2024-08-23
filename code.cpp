@@ -30,6 +30,7 @@ boolean flag=false;
 class Box{
    public:
    Servo myservo;
+   int i;
  private:
  int otp;
  int dub;
@@ -212,9 +213,22 @@ void OpenDoor() {
   lcd.setCursor(4, 1);
   lcd.print("OPEN...");
   myservo.write(90);
-  delay(7000);
-  myservo.write(0);
   delay(500);
+  lcd.clear();
+  lcd.setCursor(1, 0);
+  lcd.print("CLOSE IN");
+  for( i=9;i>=0;i--)
+  {
+  lcd.setCursor(4, 1);
+  lcd.print(i);
+  delay(1000);
+  lcd.setCursor(4, 1);
+  lcd.print(" ");
+  }
+  myservo.write(0);
+  lcd.clear();
+  lcd.print("THANK YOU");
+  delay(1000);
   lcd.clear(); 
    lcd.print("ENTER BOX");
    lcd.setCursor(0, 1);
@@ -229,6 +243,10 @@ void OpenDoor() {
  Box b5;
 void setup()
 {
+
+   Serial.begin(9600);
+  Serial.println("Welcome to the Store Hub");
+  Serial.println("Please enter the box number to open");
   
 //DEFAULT BOX SIZE 401CM FOR UNDERSTANDING
  //<<<<<<BOX 1>>>>>>//
@@ -278,7 +296,7 @@ void setup()
   // <<<<<<>>>>>>//
    lcd.begin(16, 2);
   lcd.backlight();
-  Serial.begin(9600);
+ 
    lcd.print("WELCOME TO");
    lcd.setCursor(0, 1);
    lcd.print("HUB STORE");
@@ -315,6 +333,7 @@ void loop()
    Serial.print("BOX: ");
    Serial.print(option);
    Serial.print(" ACCESS");
+   
    Serial.println();
    
    }
@@ -327,7 +346,7 @@ void loop()
   lcd.setCursor(0, 1);
   lcd.print("BOX:"+(b1.boxNumber()));
   lcd.setCursor(1 , 1);
-  Serial.begin(9600);
+
   lcd.clear();
   b1.boxonedev();
   }
@@ -347,7 +366,7 @@ void loop()
   lcd.setCursor(0, 1);
   lcd.print("BOX:"+(b2.boxNumber()));
   lcd.setCursor(1 , 1);
-  Serial.begin(9600);
+  delay(1000);
   lcd.clear();
   b2.boxonedev();
   }
@@ -367,7 +386,7 @@ void loop()
   lcd.setCursor(0, 1);
   lcd.print("BOX:"+(b3.boxNumber()));
   lcd.setCursor(1 , 1);
-  Serial.begin(9600);
+  delay(1000);
   lcd.clear();
   b3.boxonedev();
   }
@@ -387,7 +406,7 @@ void loop()
   lcd.setCursor(0, 1);
   lcd.print("BOX:"+(b4.boxNumber()));
   lcd.setCursor(1 , 1);
-  Serial.begin(9600);
+  delay(1000);
   lcd.clear();
   b4.boxonedev();
   }
@@ -407,7 +426,7 @@ void loop()
   lcd.setCursor(0, 1);
   lcd.print("BOX:"+(b5.boxNumber()));
   lcd.setCursor(1 , 1);
-  Serial.begin(9600);
+  delay(1000);
   lcd.clear();
   b5.boxonedev();
   }
